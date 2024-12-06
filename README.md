@@ -10,6 +10,12 @@ The **Superteam Bootcamp** program is a decentralized application built on the S
 - **Withdraw Tokens**: Users can withdraw tokens from the vault.
 - **Fee Management**: The program includes functionality to manage a fee vault, allowing for the collection and distribution of fees.
 
+### Challenges and Learnings
+
+  - Understanding the Anchor framework and its components.
+  - Implementing the logic for deposit, withdraw, and fee vault management.
+  - Debugging and fixing the errors that arose during the development process.
+
 ## Getting Started
 
 ### Prerequisites
@@ -53,3 +59,10 @@ Before you begin, ensure you have the following installed:
    ```bash
    anchor test
    ```
+
+3. ** Deployment successfull **
+
+    First Solana program deployed successfully!!
+
+    Program Id: 4nJDMJmyGDxRm9mdYY7rDFyQS9XPetmexBqZqPyBt4Pm
+    https://explorer.solana.com/address/4nJDMJmyGDxRm9mdYY7rDFyQS9XPetmexBqZqPyBt4Pm?cluster=devnet
