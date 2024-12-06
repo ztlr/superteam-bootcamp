@@ -12,7 +12,6 @@ describe("superteam-bootcamp", () => {
   anchor.setProvider(provider);
 
   const program = anchor.workspace.SuperteamBootcamp as Program<SuperteamBootcamp>;
-
   const payer = provider.wallet as NodeWallet;
 
   const vaultPDA = anchor.web3.PublicKey.findProgramAddressSync([Buffer.from("vault"), provider.publicKey.toBytes()], program.programId);
@@ -54,5 +53,42 @@ describe("superteam-bootcamp", () => {
     }).rpc();
     console.log("\nDeposit successfull");
     console.log("Your transaction signature", tx);
+  });
+
+  it("Initialize Fee Vault", async () => {
+    const feeVaultPDA = anchor.web3.PublicKey.findProgramAddressSync(
+        [Buffer.from("fee_vault")],
+        program.programId
+    )[0];
+
+    await program.methods.initializeFeeVault(new anchor.BN(10000))
+        .accounts({
+            authority: provider.publicKey,
+            feeVault: feeVaultPDA,
+            systemProgram: anchor.web3.SystemProgram.programId,
+        })
+        .rpc();
+  });
+
+  it("Withdraw", async () => {
+    const feeVaultPDA = anchor.web3.PublicKey.findProgramAddressSync(
+      [Buffer.from("fee_vault")],
+      program.programId
+    )[0];
+
+    await program.methods.withdraw()
+      .accounts({
+        user: provider.publicKey,
+        mint,
+        vaultData: vaultPDA[0],
+        vault,
+        userAta,
+        systemProgram: anchor.web3.SystemProgram.programId,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
+        feeVault: feeVaultPDA,
+        feeReceiver: provider.wallet.publicKey,
+      })
+      .rpc();
   });
 });

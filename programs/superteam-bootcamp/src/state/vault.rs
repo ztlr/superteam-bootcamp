@@ -1,12 +1,29 @@
 use anchor_lang::prelude::*;
 
-// Create a Vault Account
 #[account]
 pub struct Vault {
-    
+    pub address: Pubkey,
+    pub bump: u8,
 }
 
-// Implement the Space trait for the Vault
-// impl Space for Vault {
-//     const INIT_SPACE: usize = ..;
-// }
+impl Vault {
+    pub const SPACE: usize = 8 + // discriminator
+        32 + // pubkey
+        1;  // bump
+}
+
+#[account]
+pub struct FeeVault {
+    pub authority: Pubkey,
+    pub balance: u64,
+    pub withdrawal_fee: u64,
+    pub bump: u8,
+}
+
+impl FeeVault {
+    pub const SPACE: usize = 8 + // discriminator
+        32 + // pubkey
+        8 + // balance
+        8 + // withdrawal_fee
+        1;  // bump
+}

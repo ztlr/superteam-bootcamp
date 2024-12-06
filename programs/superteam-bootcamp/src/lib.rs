@@ -11,21 +11,25 @@ use instructions::*;
 pub mod superteam_bootcamp {
     use super::*;
 
-    // pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-    //     ctx.accounts.initialize(&ctx.bumps)?;
+    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
+        ctx.accounts.initialize(&ctx.bumps)?;
 
-    //     Ok(())
-    // }
+        Ok(())
+    }
 
-    // pub fn deposit(ctx: Context<Deposit>, amount: u64) -> Result<()> {
-    //     ctx.accounts.deposit(amount)?;
+    pub fn deposit(ctx: Context<Deposit>, amount: u64) -> Result<()> {
+        ctx.accounts.deposit(amount)?;
 
-    //     Ok(())
-    // }
+        Ok(())
+    }
 
-    // pub fn withdraw(ctx: Context<Withdraw>) -> Result<()> {
-    //     ctx.accounts.withdraw()?;
+    pub fn withdraw(ctx: Context<Withdraw>) -> Result<()> {
+        ctx.accounts.withdraw()?;
 
-    //     Ok(())
-    // }
+        Ok(())
+    }
+
+    pub fn initialize_fee_vault(ctx: Context<InitializeFeeVault>, withdrawal_fee: u64) -> Result<()> {
+        instructions::init_fee_vault(ctx, withdrawal_fee)
+    }
 }
